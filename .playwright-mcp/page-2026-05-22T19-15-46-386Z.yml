@@ -1,0 +1,134 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e8]:
+        - strong [ref=e9]: Literal
+        - generic [ref=e10]: 0.1.0 · Literal Studio
+    - navigation [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: Overview
+        - button "Dashboard" [ref=e14] [cursor=pointer]:
+          - img [ref=e15]
+          - generic [ref=e20]: Dashboard
+      - generic [ref=e21]:
+        - generic [ref=e22]: Catalog
+        - button "Actions 5" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e30]: Actions
+          - emphasis [ref=e31]: "5"
+        - button "Capabilities 4" [active] [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+          - generic [ref=e43]: Capabilities
+          - emphasis [ref=e44]: "4"
+        - button "Groups 1" [ref=e45] [cursor=pointer]:
+          - img [ref=e46]
+          - generic [ref=e50]: Groups
+          - emphasis [ref=e51]: "1"
+        - button "Scenarios 2" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+          - generic [ref=e57]: Scenarios
+          - emphasis [ref=e58]: "2"
+      - generic [ref=e59]:
+        - generic [ref=e60]: Governance
+        - button "Policies 6" [ref=e61] [cursor=pointer]:
+          - img [ref=e62]
+          - generic [ref=e65]: Policies
+          - emphasis [ref=e66]: "6"
+      - generic [ref=e67]:
+        - generic [ref=e68]: Runtime
+        - button "Simulator" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+          - generic [ref=e74]: Simulator
+        - button "Traces 70" [ref=e75] [cursor=pointer]:
+          - img [ref=e76]
+          - generic [ref=e78]: Traces
+          - emphasis [ref=e79]: "70"
+      - generic [ref=e80]:
+        - generic [ref=e81]: Connect
+        - button "Integrations" [ref=e82] [cursor=pointer]:
+          - img [ref=e83]
+          - generic [ref=e89]: Integrations
+        - button "Settings" [ref=e90] [cursor=pointer]:
+          - img [ref=e91]
+          - generic [ref=e94]: Settings
+    - button "Dark mode" [ref=e96] [cursor=pointer]:
+      - img [ref=e97]
+      - text: Dark mode
+  - main [ref=e99]:
+    - generic [ref=e100]:
+      - generic [ref=e101]:
+        - paragraph [ref=e102]: Smart Office Agent Harness
+        - heading "Capabilities" [level=1] [ref=e226]
+        - paragraph [ref=e104]: Controllable entities, their parameters and initial state.
+      - generic [ref=e105]:
+        - button "Import" [ref=e106] [cursor=pointer]:
+          - img [ref=e107]
+          - text: Import
+        - button "Export" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - text: Export
+        - button "Reload from server" [ref=e114] [cursor=pointer]:
+          - img [ref=e115]
+        - button "Revert" [disabled] [ref=e120]:
+          - img [ref=e121]
+          - text: Revert
+        - button "Save changes" [disabled] [ref=e124]:
+          - img [ref=e125]
+          - text: Save changes
+    - generic [ref=e227]:
+      - generic [ref=e228]:
+        - textbox "New capability name" [ref=e229]:
+          - /placeholder: e.g. Lobby lights
+        - button "Add capability" [ref=e230] [cursor=pointer]:
+          - img [ref=e231]
+          - text: Add capability
+      - generic [ref=e232]:
+        - article [ref=e233]:
+          - generic [ref=e234] [cursor=pointer]:
+            - button "Expand" [ref=e235]:
+              - img [ref=e236]
+            - generic [ref=e238]:
+              - strong [ref=e239]: Lobby lights
+              - generic [ref=e240]: lighting
+            - generic [ref=e241]:
+              - generic [ref=e242]: 3 actions
+              - generic [ref=e243]: 2 params
+              - button "Delete" [ref=e244]:
+                - img [ref=e245]
+        - article [ref=e248]:
+          - generic [ref=e249] [cursor=pointer]:
+            - button "Expand" [ref=e250]:
+              - img [ref=e251]
+            - generic [ref=e253]:
+              - strong [ref=e254]: Meeting room climate
+              - generic [ref=e255]: climate
+            - generic [ref=e256]:
+              - generic [ref=e257]: 3 actions
+              - generic [ref=e258]: 2 params
+              - button "Delete" [ref=e259]:
+                - img [ref=e260]
+        - article [ref=e263]:
+          - generic [ref=e264] [cursor=pointer]:
+            - button "Expand" [ref=e265]:
+              - img [ref=e266]
+            - generic [ref=e268]:
+              - strong [ref=e269]: Server room door
+              - generic [ref=e270]: access
+            - generic [ref=e271]:
+              - generic [ref=e272]: 2 actions
+              - generic [ref=e273]: 0 params
+              - button "Delete" [ref=e274]:
+                - img [ref=e275]
+        - article [ref=e278]:
+          - generic [ref=e279] [cursor=pointer]:
+            - button "Expand" [ref=e280]:
+              - img [ref=e281]
+            - generic [ref=e283]:
+              - strong [ref=e284]: Visitor check-in kiosk
+              - generic [ref=e285]: service
+            - generic [ref=e286]:
+              - generic [ref=e287]: 2 actions
+              - generic [ref=e288]: 0 params
+              - button "Delete" [ref=e289]:
+                - img [ref=e290]

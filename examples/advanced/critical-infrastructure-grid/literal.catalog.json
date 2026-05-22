@@ -1,0 +1,187 @@
+{
+  "name": "Critical Infrastructure Grid Harness",
+  "version": "0.2.0-advanced",
+  "actions": {
+    "inspect_telemetry": {
+      "description": "Read grid telemetry and state.",
+      "verbs": ["inspect", "show", "check", "status", "telemetry"]
+    },
+    "set_operating_mode": {
+      "description": "Set the operating mode of a grid asset.",
+      "verbs": ["set mode", "switch mode", "place"]
+    },
+    "shed_load": {
+      "description": "Reduce controllable load.",
+      "verbs": ["shed load", "curtail", "reduce load"]
+    },
+    "restore_load": {
+      "description": "Restore previously curtailed load.",
+      "verbs": ["restore load", "resume load"]
+    },
+    "dispatch_battery": {
+      "description": "Dispatch battery power or charge mode.",
+      "verbs": ["dispatch battery", "dispatch", "charge battery"]
+    },
+    "throttle_chargers": {
+      "description": "Throttle EV charging demand.",
+      "verbs": ["throttle chargers", "limit chargers"]
+    },
+    "island_microgrid": {
+      "description": "Separate a microgrid from the main grid.",
+      "verbs": ["island", "island microgrid"]
+    },
+    "reconnect_grid": {
+      "description": "Reconnect a microgrid to the main grid.",
+      "verbs": ["reconnect", "resync grid"]
+    },
+    "open_breaker": {
+      "description": "Open a physical breaker.",
+      "verbs": ["open breaker", "trip breaker"]
+    },
+    "close_breaker": {
+      "description": "Close a physical breaker.",
+      "verbs": ["close breaker", "restore breaker"]
+    },
+    "notify_operator": {
+      "description": "Notify grid operations staff.",
+      "verbs": ["notify", "page", "alert"]
+    },
+    "generate_grid_sitrep": {
+      "description": "Generate a grid situation report.",
+      "verbs": ["generate report", "grid sitrep", "summarize"]
+    },
+    "disable_protection": {
+      "description": "Protection bypass boundary; explicitly denied.",
+      "verbs": ["disable protection", "bypass relay"]
+    },
+    "force_manual_override": {
+      "description": "Manual override boundary; explicitly denied.",
+      "verbs": ["force override", "manual override"]
+    }
+  },
+  "capabilities": {
+    "North Battery Fleet": {
+      "kind": "distributed-energy-resource",
+      "description": "Battery fleet supporting the north feeder area.",
+      "aliases": ["north batteries", "battery fleet north", "BESS north"],
+      "actions": ["inspect_telemetry", "set_operating_mode", "dispatch_battery", "generate_grid_sitrep"],
+      "parameters": {
+        "mode": {"values": ["idle", "charge", "discharge", "reserve", "black_start_support"]},
+        "power_kw": {"range": [0, 5000]},
+        "duration_minutes": {"range": [0, 240]},
+        "reason": {"values": ["peak", "frequency", "storm", "black_start", "manual_review"]}
+      },
+      "state": {"mode": "reserve", "state_of_charge": 82, "available_kw": 4200}
+    },
+    "Hospital Feeder 12": {
+      "kind": "critical-load-feeder",
+      "description": "Critical feeder for hospital and emergency services.",
+      "aliases": ["hospital feeder", "feeder 12", "critical feeder"],
+      "actions": ["inspect_telemetry", "set_operating_mode", "shed_load", "restore_load", "notify_operator", "generate_grid_sitrep"],
+      "parameters": {
+        "mode": {"values": ["normal", "conservation", "critical_only", "manual_control"]},
+        "load_kw": {"range": [0, 9000]},
+        "priority": {"values": ["critical", "essential", "deferable"]},
+        "reason": {"values": ["storm", "frequency", "maintenance", "incident", "manual_review"]}
+      },
+      "state": {"mode": "normal", "load_kw": 6400, "breaker": "closed"}
+    },
+    "EV Depot Cluster": {
+      "kind": "controllable-load",
+      "description": "Aggregated EV charging depot.",
+      "aliases": ["EV depot", "chargers", "fleet chargers"],
+      "actions": ["inspect_telemetry", "set_operating_mode", "shed_load", "restore_load", "throttle_chargers", "generate_grid_sitrep"],
+      "parameters": {
+        "mode": {"values": ["normal", "throttled", "paused", "priority_charge"]},
+        "load_kw": {"range": [0, 7000]},
+        "priority": {"values": ["critical", "essential", "deferable"]},
+        "reason": {"values": ["peak", "frequency", "storm", "tariff", "manual_review"]}
+      },
+      "state": {"mode": "normal", "load_kw": 5300, "connected_vehicles": 184}
+    },
+    "Solar Inverter Field A": {
+      "kind": "distributed-generation",
+      "description": "Solar inverter field at substation A.",
+      "aliases": ["solar field", "inverter A", "PV field"],
+      "actions": ["inspect_telemetry", "set_operating_mode", "shed_load", "restore_load", "generate_grid_sitrep"],
+      "parameters": {
+        "mode": {"values": ["normal", "curtailed", "voltage_support", "offline"]},
+        "power_kw": {"range": [0, 12000]},
+        "reason": {"values": ["voltage", "frequency", "storm", "maintenance", "manual_review"]}
+      },
+      "state": {"mode": "normal", "available_kw": 9600, "curtailment": 0}
+    },
+    "Breaker SW-17": {
+      "kind": "physical-actuator",
+      "description": "Substation switching breaker SW-17.",
+      "aliases": ["SW17", "breaker 17", "switch 17"],
+      "actions": ["inspect_telemetry", "open_breaker", "close_breaker", "notify_operator", "generate_grid_sitrep", "disable_protection", "force_manual_override"],
+      "parameters": {
+        "reason": {"values": ["storm", "fault_isolation", "maintenance", "black_start", "manual_review"]},
+        "priority": {"values": ["critical", "essential", "deferable"]}
+      },
+      "state": {"position": "closed", "relay_status": "armed", "last_operation": "2026-05-21T18:30:00Z"}
+    },
+    "Downtown Microgrid": {
+      "kind": "microgrid-controller",
+      "description": "Controller for downtown critical-load island.",
+      "aliases": ["downtown island", "microgrid", "downtown grid"],
+      "actions": ["inspect_telemetry", "set_operating_mode", "island_microgrid", "reconnect_grid", "dispatch_battery", "notify_operator", "generate_grid_sitrep"],
+      "parameters": {
+        "mode": {"values": ["grid_connected", "islanded", "black_start", "resync_pending", "manual_control"]},
+        "power_kw": {"range": [0, 15000]},
+        "duration_minutes": {"range": [0, 480]},
+        "reason": {"values": ["storm", "fault_isolation", "black_start", "frequency", "manual_review"]}
+      },
+      "state": {"mode": "grid_connected", "critical_load_kw": 11200, "reserve_minutes": 96}
+    }
+  },
+  "groups": {
+    "Demand Response Stack": {
+      "description": "Assets used to reduce demand during peaks or frequency events.",
+      "aliases": ["DR stack", "demand stack", "peak response"],
+      "members": ["EV Depot Cluster", "Solar Inverter Field A", "North Battery Fleet"],
+      "actions": ["inspect_telemetry", "set_operating_mode", "shed_load", "restore_load", "dispatch_battery", "throttle_chargers", "generate_grid_sitrep"]
+    },
+    "Critical Load Island Stack": {
+      "description": "Assets coordinated during microgrid islanding.",
+      "aliases": ["island stack", "critical island"],
+      "members": ["Hospital Feeder 12", "Downtown Microgrid", "North Battery Fleet", "Breaker SW-17"],
+      "actions": ["inspect_telemetry", "set_operating_mode", "island_microgrid", "reconnect_grid", "dispatch_battery", "open_breaker", "close_breaker", "notify_operator", "generate_grid_sitrep"]
+    }
+  },
+  "scenarios": {
+    "storm_islanding": {
+      "description": "Move critical loads into a guarded islanding posture during storm faults.",
+      "aliases": ["storm island", "islanding mode"],
+      "steps": [
+        {"target": "Downtown Microgrid", "action": "set_operating_mode", "parameters": {"mode": "resync_pending", "reason": "storm"}},
+        {"target": "North Battery Fleet", "action": "dispatch_battery", "parameters": {"mode": "discharge", "power_kw": 3500, "duration_minutes": 90, "reason": "storm"}},
+        {"target": "Hospital Feeder 12", "action": "set_operating_mode", "parameters": {"mode": "critical_only", "priority": "critical", "reason": "storm"}},
+        {"target": "Breaker SW-17", "action": "open_breaker", "parameters": {"reason": "fault_isolation", "priority": "critical"}},
+        {"target": "Downtown Microgrid", "action": "island_microgrid", "parameters": {"mode": "islanded", "power_kw": 11200, "duration_minutes": 90, "reason": "storm"}},
+        {"target": "Critical Load Island Stack", "action": "generate_grid_sitrep", "parameters": {"reason": "storm", "priority": "critical"}}
+      ]
+    },
+    "peak_demand_response": {
+      "description": "Reduce controllable load during a peak event without touching critical loads.",
+      "aliases": ["peak response", "demand response"],
+      "steps": [
+        {"target": "EV Depot Cluster", "action": "throttle_chargers", "parameters": {"mode": "throttled", "load_kw": 2200, "priority": "deferable", "reason": "peak"}},
+        {"target": "Solar Inverter Field A", "action": "set_operating_mode", "parameters": {"mode": "voltage_support", "power_kw": 9000, "reason": "voltage"}},
+        {"target": "North Battery Fleet", "action": "dispatch_battery", "parameters": {"mode": "discharge", "power_kw": 2500, "duration_minutes": 60, "reason": "peak"}},
+        {"target": "Demand Response Stack", "action": "generate_grid_sitrep", "parameters": {"reason": "peak", "priority": "deferable"}}
+      ]
+    },
+    "black_start_recovery": {
+      "description": "Prepare black-start support without allowing relay bypass.",
+      "aliases": ["black start", "restore island"],
+      "steps": [
+        {"target": "North Battery Fleet", "action": "set_operating_mode", "parameters": {"mode": "black_start_support", "power_kw": 4000, "duration_minutes": 120, "reason": "black_start"}},
+        {"target": "Downtown Microgrid", "action": "set_operating_mode", "parameters": {"mode": "black_start", "power_kw": 9000, "duration_minutes": 120, "reason": "black_start"}},
+        {"target": "Breaker SW-17", "action": "notify_operator", "parameters": {"reason": "black_start", "priority": "critical"}},
+        {"target": "Critical Load Island Stack", "action": "generate_grid_sitrep", "parameters": {"reason": "black_start", "priority": "critical"}}
+      ]
+    }
+  }
+}

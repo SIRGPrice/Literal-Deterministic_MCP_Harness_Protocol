@@ -1,0 +1,226 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e8]:
+        - strong [ref=e9]: Literal
+        - generic [ref=e10]: 0.1.0 · Literal Studio
+    - navigation [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: Overview
+        - button "Dashboard" [ref=e14] [cursor=pointer]:
+          - img [ref=e15]
+          - generic [ref=e20]: Dashboard
+      - generic [ref=e21]:
+        - generic [ref=e22]: Catalog
+        - button "Actions 5" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e30]: Actions
+          - emphasis [ref=e31]: "5"
+        - button "Capabilities 4" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+          - generic [ref=e43]: Capabilities
+          - emphasis [ref=e44]: "4"
+        - button "Groups 1" [ref=e45] [cursor=pointer]:
+          - img [ref=e46]
+          - generic [ref=e50]: Groups
+          - emphasis [ref=e51]: "1"
+        - button "Scenarios 2" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+          - generic [ref=e57]: Scenarios
+          - emphasis [ref=e58]: "2"
+      - generic [ref=e59]:
+        - generic [ref=e60]: Governance
+        - button "Policies 6" [active] [ref=e61] [cursor=pointer]:
+          - img [ref=e62]
+          - generic [ref=e65]: Policies
+          - emphasis [ref=e66]: "6"
+      - generic [ref=e67]:
+        - generic [ref=e68]: Runtime
+        - button "Simulator" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+          - generic [ref=e74]: Simulator
+        - button "Traces 70" [ref=e75] [cursor=pointer]:
+          - img [ref=e76]
+          - generic [ref=e78]: Traces
+          - emphasis [ref=e79]: "70"
+      - generic [ref=e80]:
+        - generic [ref=e81]: Connect
+        - button "Integrations" [ref=e82] [cursor=pointer]:
+          - img [ref=e83]
+          - generic [ref=e89]: Integrations
+        - button "Settings" [ref=e90] [cursor=pointer]:
+          - img [ref=e91]
+          - generic [ref=e94]: Settings
+    - button "Dark mode" [ref=e96] [cursor=pointer]:
+      - img [ref=e97]
+      - text: Dark mode
+  - main [ref=e99]:
+    - generic [ref=e100]:
+      - generic [ref=e101]:
+        - paragraph [ref=e102]: Smart Office Agent Harness
+        - heading "Policies" [level=1] [ref=e293]
+        - paragraph [ref=e104]: Confirmations, deny rules, synonyms and fuzzy matching cutoff.
+      - generic [ref=e105]:
+        - button "Import" [ref=e106] [cursor=pointer]:
+          - img [ref=e107]
+          - text: Import
+        - button "Export" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - text: Export
+        - button "Reload from server" [ref=e114] [cursor=pointer]:
+          - img [ref=e115]
+        - button "Revert" [disabled] [ref=e120]:
+          - img [ref=e121]
+          - text: Revert
+        - button "Save changes" [disabled] [ref=e124]:
+          - img [ref=e125]
+          - text: Save changes
+    - generic [ref=e294]:
+      - generic [ref=e295]:
+        - generic [ref=e296]:
+          - img [ref=e297]
+          - generic [ref=e300]: Fuzzy resolution
+        - generic [ref=e301]:
+          - generic [ref=e302]:
+            - generic [ref=e303]: Cutoff 0.62
+            - slider "Fuzzy cutoff" [ref=e304]: "0.62"
+            - generic [ref=e305]: Lower values accept looser matches.
+          - generic [ref=e306]:
+            - generic [ref=e307]: Inspect verbs
+            - generic [ref=e308]:
+              - generic [ref=e309]:
+                - text: inspect
+                - button "Remove inspect" [ref=e310] [cursor=pointer]: ×
+              - generic [ref=e311]:
+                - text: status
+                - button "Remove status" [ref=e312] [cursor=pointer]: ×
+              - generic [ref=e313]:
+                - text: show
+                - button "Remove show" [ref=e314] [cursor=pointer]: ×
+              - generic [ref=e315]:
+                - text: check
+                - button "Remove check" [ref=e316] [cursor=pointer]: ×
+              - textbox "inspect, status, show" [ref=e317]
+          - generic [ref=e318]:
+            - generic [ref=e319]: Scenario verbs
+            - generic [ref=e320]:
+              - generic [ref=e321]:
+                - text: run
+                - button "Remove run" [ref=e322] [cursor=pointer]: ×
+              - generic [ref=e323]:
+                - text: start
+                - button "Remove start" [ref=e324] [cursor=pointer]: ×
+              - generic [ref=e325]:
+                - text: activate
+                - button "Remove activate" [ref=e326] [cursor=pointer]: ×
+              - generic [ref=e327]:
+                - text: execute
+                - button "Remove execute" [ref=e328] [cursor=pointer]: ×
+              - textbox "run, start, execute" [ref=e329]
+      - generic [ref=e330]:
+        - generic [ref=e331]:
+          - img [ref=e332]
+          - generic [ref=e335]: Confirmations
+          - button "Add rule" [ref=e337] [cursor=pointer]:
+            - img [ref=e338]
+            - text: Add rule
+        - generic [ref=e341]:
+          - combobox "Rule target" [ref=e342]:
+            - option "*"
+            - option "Lobby lights"
+            - option "Meeting room climate"
+            - option "Server room door" [selected]
+            - option "Visitor check-in kiosk"
+            - option "Public areas"
+          - combobox "Rule action" [ref=e343]:
+            - option "*"
+            - option "turn_on"
+            - option "turn_off"
+            - option "set"
+            - option "lock"
+            - option "unlock" [selected]
+          - textbox "Rule reason" [ref=e344]:
+            - /placeholder: reason
+            - text: Restricted access requires explicit confirmation.
+          - button "Delete rule" [ref=e345] [cursor=pointer]:
+            - img [ref=e346]
+      - generic [ref=e349]:
+        - generic [ref=e350]:
+          - img [ref=e351]
+          - generic [ref=e354]: Deny rules
+          - button "Add rule" [ref=e356] [cursor=pointer]:
+            - img [ref=e357]
+            - text: Add rule
+        - generic [ref=e360]: No rules
+      - generic [ref=e361]:
+        - generic [ref=e362]:
+          - img [ref=e363]
+          - generic [ref=e364]: Synonyms
+          - generic [ref=e366]:
+            - textbox "New synonym key" [ref=e367]:
+              - /placeholder: canonical word
+            - button "Add" [ref=e368] [cursor=pointer]:
+              - img [ref=e369]
+              - text: Add
+        - generic [ref=e371]:
+          - generic [ref=e372]:
+            - textbox "Synonym key" [ref=e373]: turn_on
+            - generic [ref=e374]:
+              - generic [ref=e375]:
+                - text: power on
+                - button "Remove power on" [ref=e376] [cursor=pointer]: ×
+              - generic [ref=e377]:
+                - text: bring up
+                - button "Remove bring up" [ref=e378] [cursor=pointer]: ×
+              - textbox "aliases" [ref=e379]
+            - button "Delete turn_on" [ref=e380] [cursor=pointer]:
+              - img [ref=e381]
+          - generic [ref=e384]:
+            - textbox "Synonym key" [ref=e385]: turn_off
+            - generic [ref=e386]:
+              - generic [ref=e387]:
+                - text: power down
+                - button "Remove power down" [ref=e388] [cursor=pointer]: ×
+              - generic [ref=e389]:
+                - text: shut down
+                - button "Remove shut down" [ref=e390] [cursor=pointer]: ×
+              - textbox "aliases" [ref=e391]
+            - button "Delete turn_off" [ref=e392] [cursor=pointer]:
+              - img [ref=e393]
+          - generic [ref=e396]:
+            - textbox "Synonym key" [ref=e397]: set
+            - generic [ref=e398]:
+              - generic [ref=e399]:
+                - text: put
+                - button "Remove put" [ref=e400] [cursor=pointer]: ×
+              - generic [ref=e401]:
+                - text: make
+                - button "Remove make" [ref=e402] [cursor=pointer]: ×
+              - textbox "aliases" [ref=e403]
+            - button "Delete set" [ref=e404] [cursor=pointer]:
+              - img [ref=e405]
+          - generic [ref=e408]:
+            - textbox "Synonym key" [ref=e409]: high
+            - generic [ref=e410]:
+              - generic [ref=e411]:
+                - text: maximum
+                - button "Remove maximum" [ref=e412] [cursor=pointer]: ×
+              - generic [ref=e413]:
+                - text: bright
+                - button "Remove bright" [ref=e414] [cursor=pointer]: ×
+              - textbox "aliases" [ref=e415]
+            - button "Delete high" [ref=e416] [cursor=pointer]:
+              - img [ref=e417]
+          - generic [ref=e420]:
+            - textbox "Synonym key" [ref=e421]: low
+            - generic [ref=e422]:
+              - generic [ref=e423]:
+                - text: minimum
+                - button "Remove minimum" [ref=e424] [cursor=pointer]: ×
+              - generic [ref=e425]:
+                - text: dim
+                - button "Remove dim" [ref=e426] [cursor=pointer]: ×
+              - textbox "aliases" [ref=e427]
+            - button "Delete low" [ref=e428] [cursor=pointer]:
+              - img [ref=e429]

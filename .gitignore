@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.pnpm-store/
+*.tsbuildinfo
+
+# Local runtime state
+.literal/
+literal-state.json
+literal-traces.jsonl
+literal.config.local.*
+
+# Editors / OS
+.vscode/settings.json
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+!.env.example

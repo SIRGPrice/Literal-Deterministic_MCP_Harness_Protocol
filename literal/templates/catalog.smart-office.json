@@ -1,0 +1,106 @@
+{
+  "name": "Smart Office Agent Harness",
+  "version": "0.1.0",
+  "actions": {
+    "turn_on": {
+      "description": "Enable a controllable capability.",
+      "verbs": ["turn on", "enable", "activate", "start"]
+    },
+    "turn_off": {
+      "description": "Disable a controllable capability.",
+      "verbs": ["turn off", "disable", "deactivate", "stop"]
+    },
+    "set": {
+      "description": "Set a supported parameter.",
+      "verbs": ["set", "change", "adjust"]
+    },
+    "lock": {
+      "description": "Lock a controlled entry point.",
+      "verbs": ["lock", "secure"]
+    },
+    "unlock": {
+      "description": "Unlock a controlled entry point.",
+      "verbs": ["unlock", "open access"],
+      "confirmation_required": true
+    }
+  },
+  "capabilities": {
+    "Lobby lights": {
+      "description": "Lighting zone for reception and waiting area.",
+      "kind": "lighting",
+      "aliases": ["entrance lights", "front lights"],
+      "actions": ["turn_on", "turn_off", "set"],
+      "parameters": {
+        "level": {
+          "description": "Brightness level.",
+          "values": ["low", "medium", "high"]
+        },
+        "temperature": {
+          "description": "Color temperature.",
+          "values": ["warm", "neutral", "cool"]
+        }
+      },
+      "state": {"status": "inactive", "level": "medium", "temperature": "neutral"}
+    },
+    "Meeting room climate": {
+      "description": "Climate control zone for meeting rooms.",
+      "kind": "climate",
+      "aliases": ["conference climate", "meeting rooms"],
+      "actions": ["turn_on", "turn_off", "set"],
+      "parameters": {
+        "temperature": {
+          "description": "Target temperature in Celsius.",
+          "range": [18, 27]
+        },
+        "mode": {
+          "description": "HVAC operating mode.",
+          "values": ["eco", "comfort", "boost"]
+        }
+      },
+      "state": {"status": "inactive", "temperature": 22, "mode": "eco"}
+    },
+    "Server room door": {
+      "description": "Restricted access door controlled by policy.",
+      "kind": "access",
+      "aliases": ["data room door", "restricted door"],
+      "actions": ["lock", "unlock"],
+      "parameters": {},
+      "state": {"status": "active", "last_action": "lock"}
+    },
+    "Visitor check-in kiosk": {
+      "description": "Self-service check-in terminal.",
+      "kind": "service",
+      "aliases": ["front desk kiosk", "visitor kiosk"],
+      "actions": ["turn_on", "turn_off"],
+      "parameters": {},
+      "state": {"status": "active"}
+    }
+  },
+  "groups": {
+    "Public areas": {
+      "description": "All capabilities visible to visitors.",
+      "members": ["Lobby lights", "Visitor check-in kiosk"],
+      "aliases": ["front of house", "visitor areas"],
+      "actions": ["turn_on", "turn_off"]
+    }
+  },
+  "scenarios": {
+    "Opening mode": {
+      "description": "Prepare the office for the day.",
+      "aliases": ["open the office", "morning mode"],
+      "steps": [
+        {"target": "Public areas", "action": "turn_on", "parameters": {}},
+        {"target": "Lobby lights", "action": "set", "parameters": {"level": "medium", "temperature": "warm"}},
+        {"target": "Meeting room climate", "action": "set", "parameters": {"temperature": 22, "mode": "comfort"}}
+      ]
+    },
+    "Quiet hours": {
+      "description": "Reduce activity after close.",
+      "aliases": ["evening mode", "after hours"],
+      "steps": [
+        {"target": "Visitor check-in kiosk", "action": "turn_off", "parameters": {}},
+        {"target": "Lobby lights", "action": "set", "parameters": {"level": "low", "temperature": "warm"}}
+      ]
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://literal.local/schemas/catalog.schema.json",
+  "title": "Literal Catalog",
+  "type": "object",
+  "required": ["actions", "capabilities"],
+  "properties": {
+    "name": {"type": "string"},
+    "version": {"type": "string"},
+    "actions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "description": {"type": "string"},
+          "verbs": {"type": "array", "items": {"type": "string"}},
+          "confirmation_required": {"type": "boolean"}
+        }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["actions"],
+        "properties": {
+          "description": {"type": "string"},
+          "kind": {"type": "string"},
+          "aliases": {"type": "array", "items": {"type": "string"}},
+          "actions": {"type": "array", "items": {"type": "string"}},
+          "parameters": {"type": "object"},
+          "state": {"type": "object"}
+        }
+      }
+    },
+    "groups": {"type": "object"},
+    "scenarios": {"type": "object"}
+  }
+}

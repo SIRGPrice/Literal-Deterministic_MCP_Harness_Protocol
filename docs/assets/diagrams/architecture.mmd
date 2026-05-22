@@ -1,0 +1,12 @@
+flowchart LR
+  U[Request] --> R{Deterministic router}
+  R -->|clear| V[Policy validator]
+  R -->|ambiguous| L[Model planner]
+  L --> V
+  V -->|allowed| H[MCP harness]
+  V -->|confirm| C[Confirmation gate]
+  V -->|deny| E[Structured error]
+  C --> H
+  H --> S[Atomic state]
+  H --> T[Decision trace]
+  E --> T

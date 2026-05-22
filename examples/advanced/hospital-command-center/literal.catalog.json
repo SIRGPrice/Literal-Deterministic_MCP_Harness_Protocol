@@ -1,0 +1,197 @@
+{
+  "name": "Hospital Command Center Harness",
+  "version": "0.2.0-advanced",
+  "actions": {
+    "inspect_status": {
+      "description": "Read the current state of an operational unit.",
+      "verbs": ["inspect", "show", "check", "status"]
+    },
+    "set_mode": {
+      "description": "Set an operational mode on a unit or group.",
+      "verbs": ["set mode", "switch mode", "place"]
+    },
+    "reserve_capacity": {
+      "description": "Reserve capacity for incoming demand.",
+      "verbs": ["reserve", "hold capacity", "allocate"]
+    },
+    "release_capacity": {
+      "description": "Release previously reserved capacity.",
+      "verbs": ["release", "free capacity"]
+    },
+    "route_patient_flow": {
+      "description": "Route patient flow between operational units.",
+      "verbs": ["route", "send", "direct"]
+    },
+    "schedule_diagnostic_slot": {
+      "description": "Reserve a diagnostic slot in imaging or lab workflows.",
+      "verbs": ["schedule", "book", "slot"]
+    },
+    "open_incident_channel": {
+      "description": "Open a predefined command channel.",
+      "verbs": ["open channel", "start channel"]
+    },
+    "notify_team": {
+      "description": "Notify an internal response team.",
+      "verbs": ["notify", "page", "alert"]
+    },
+    "escalate_to_commander": {
+      "description": "Escalate the situation to the incident commander.",
+      "verbs": ["escalate", "raise incident"]
+    },
+    "lockdown_unit": {
+      "description": "Restrict a unit for infection-control or security reasons.",
+      "verbs": ["lockdown", "restrict access"]
+    },
+    "generate_sitrep": {
+      "description": "Generate a situation report.",
+      "verbs": ["generate report", "create sitrep", "summarize"]
+    },
+    "discharge_patient": {
+      "description": "Clinical discharge boundary; present so policy can explicitly deny it.",
+      "verbs": ["discharge", "send home"]
+    },
+    "override_clinician": {
+      "description": "Clinical authority boundary; present so policy can explicitly deny it.",
+      "verbs": ["override clinician", "override doctor"]
+    },
+    "create_prescription": {
+      "description": "Medication boundary; present so policy can explicitly deny it.",
+      "verbs": ["prescribe", "create prescription"]
+    }
+  },
+  "capabilities": {
+    "Emergency Department Intake": {
+      "kind": "clinical-operations",
+      "description": "Front-door intake queue and triage load balancer.",
+      "aliases": ["ED intake", "ER intake", "triage desk", "emergency intake"],
+      "actions": ["inspect_status", "set_mode", "reserve_capacity", "release_capacity", "route_patient_flow", "notify_team", "generate_sitrep"],
+      "parameters": {
+        "mode": {"values": ["normal", "surge", "diversion", "mass_casualty", "infectious_surge"]},
+        "acuity": {"values": ["low", "moderate", "high", "critical"]},
+        "patient_class": {"values": ["adult", "pediatric", "obstetric", "trauma", "infectious_risk"]},
+        "capacity": {"range": [0, 120]},
+        "destination": {"values": ["radiology", "ICU", "ward", "isolation", "ambulance_bay", "fast_track"]}
+      },
+      "state": {"mode": "normal", "capacity_reserved": 0, "queue_depth": 18, "last_sitrep": "green"}
+    },
+    "ICU Bed Board": {
+      "kind": "clinical-operations",
+      "description": "Critical-care capacity allocation board.",
+      "aliases": ["ICU", "critical care board", "intensive care"],
+      "actions": ["inspect_status", "set_mode", "reserve_capacity", "release_capacity", "notify_team", "generate_sitrep"],
+      "parameters": {
+        "mode": {"values": ["normal", "surge", "scarce_capacity", "closed"]},
+        "capacity": {"range": [0, 80]},
+        "acuity": {"values": ["high", "critical"]}
+      },
+      "state": {"mode": "normal", "available_beds": 11, "staffing": "yellow"}
+    },
+    "Isolation Ward": {
+      "kind": "clinical-operations",
+      "description": "Negative-pressure and infection-control unit.",
+      "aliases": ["isolation", "negative pressure ward", "infection ward"],
+      "actions": ["inspect_status", "set_mode", "reserve_capacity", "release_capacity", "lockdown_unit", "notify_team", "generate_sitrep"],
+      "parameters": {
+        "mode": {"values": ["normal", "containment", "closed", "decon"]},
+        "capacity": {"range": [0, 42]},
+        "isolation_class": {"values": ["airborne", "droplet", "contact", "unknown"]}
+      },
+      "state": {"mode": "normal", "available_rooms": 7, "ppe_status": "green"}
+    },
+    "Radiology CT Queue": {
+      "kind": "diagnostic-operations",
+      "description": "CT scanner demand and prioritization queue.",
+      "aliases": ["CT queue", "scanner queue", "radiology queue"],
+      "actions": ["inspect_status", "set_mode", "reserve_capacity", "schedule_diagnostic_slot", "notify_team", "generate_sitrep"],
+      "parameters": {
+        "mode": {"values": ["normal", "trauma_priority", "stroke_priority", "downtime"]},
+        "slot_priority": {"values": ["routine", "urgent", "stroke", "trauma"]},
+        "capacity": {"range": [0, 36]}
+      },
+      "state": {"mode": "normal", "open_slots": 12, "backlog": 9}
+    },
+    "Ambulance Bay": {
+      "kind": "logistics",
+      "description": "Inbound EMS staging and ambulance bay routing.",
+      "aliases": ["EMS bay", "ambulance queue", "vehicle bay"],
+      "actions": ["inspect_status", "set_mode", "reserve_capacity", "release_capacity", "route_patient_flow", "notify_team"],
+      "parameters": {
+        "mode": {"values": ["open", "restricted", "diverting", "decon"]},
+        "capacity": {"range": [0, 30]},
+        "destination": {"values": ["ED", "isolation", "trauma", "pediatric", "offsite"]}
+      },
+      "state": {"mode": "open", "staged_units": 4, "available_bays": 6}
+    },
+    "Hospital Incident Command": {
+      "kind": "incident-command",
+      "description": "Command channel for major operational incidents.",
+      "aliases": ["HICS", "incident command", "command bridge"],
+      "actions": ["inspect_status", "set_mode", "open_incident_channel", "notify_team", "escalate_to_commander", "generate_sitrep"],
+      "parameters": {
+        "mode": {"values": ["monitoring", "activated", "mass_casualty", "infectious_surge", "downtime"]},
+        "team": {"values": ["operations", "clinical_lead", "infection_control", "security", "executive", "communications"]},
+        "severity": {"values": ["watch", "minor", "major", "critical"]}
+      },
+      "state": {"mode": "monitoring", "active_channel": "none", "commander_on_call": "assigned"}
+    },
+    "Clinical Authority Boundary": {
+      "kind": "safety-boundary",
+      "description": "Explicit non-operational boundary for clinical decisions.",
+      "aliases": ["medical authority", "clinician boundary"],
+      "actions": ["discharge_patient", "override_clinician", "create_prescription"],
+      "parameters": {
+        "reason": {"values": ["agent_request", "operator_request", "unknown"]}
+      },
+      "state": {"status": "policy_enforced"}
+    }
+  },
+  "groups": {
+    "Critical Care Surge Stack": {
+      "description": "Units coordinated during an ICU or ED surge.",
+      "aliases": ["surge stack", "critical care stack"],
+      "members": ["Emergency Department Intake", "ICU Bed Board", "Radiology CT Queue"],
+      "actions": ["inspect_status", "set_mode", "reserve_capacity", "notify_team", "generate_sitrep"]
+    },
+    "Infection Control Stack": {
+      "description": "Units coordinated during possible infectious surge.",
+      "aliases": ["infection stack", "containment stack"],
+      "members": ["Emergency Department Intake", "Isolation Ward", "Ambulance Bay", "Hospital Incident Command"],
+      "actions": ["inspect_status", "set_mode", "reserve_capacity", "lockdown_unit", "notify_team", "generate_sitrep"]
+    }
+  },
+  "scenarios": {
+    "mass_casualty_intake": {
+      "description": "Activate a guarded mass-casualty intake flow.",
+      "aliases": ["MCI intake", "major incident intake"],
+      "steps": [
+        {"target": "Hospital Incident Command", "action": "set_mode", "parameters": {"mode": "mass_casualty", "severity": "critical"}, "description": "Activate command."},
+        {"target": "Hospital Incident Command", "action": "open_incident_channel", "parameters": {"team": "operations", "severity": "critical"}, "description": "Open the operations channel."},
+        {"target": "Emergency Department Intake", "action": "set_mode", "parameters": {"mode": "mass_casualty", "acuity": "critical"}, "description": "Set intake to MCI mode."},
+        {"target": "ICU Bed Board", "action": "reserve_capacity", "parameters": {"capacity": 8, "acuity": "critical"}, "description": "Hold critical-care capacity."},
+        {"target": "Radiology CT Queue", "action": "set_mode", "parameters": {"mode": "trauma_priority", "slot_priority": "trauma"}, "description": "Prioritize trauma imaging."},
+        {"target": "Critical Care Surge Stack", "action": "generate_sitrep", "parameters": {"severity": "critical"}, "description": "Create a cross-unit sitrep."}
+      ]
+    },
+    "infectious_surge_containment": {
+      "description": "Move the hospital into infection-control surge posture.",
+      "aliases": ["containment mode", "infection surge"],
+      "steps": [
+        {"target": "Hospital Incident Command", "action": "set_mode", "parameters": {"mode": "infectious_surge", "severity": "major"}},
+        {"target": "Isolation Ward", "action": "set_mode", "parameters": {"mode": "containment", "isolation_class": "unknown"}},
+        {"target": "Ambulance Bay", "action": "set_mode", "parameters": {"mode": "decon", "destination": "isolation"}},
+        {"target": "Infection Control Stack", "action": "notify_team", "parameters": {"team": "infection_control", "severity": "major"}},
+        {"target": "Isolation Ward", "action": "reserve_capacity", "parameters": {"capacity": 12, "isolation_class": "airborne"}}
+      ]
+    },
+    "imaging_backlog_recovery": {
+      "description": "Recover CT queue during high ED pressure without bypassing safety policy.",
+      "aliases": ["CT recovery", "scanner recovery"],
+      "steps": [
+        {"target": "Radiology CT Queue", "action": "set_mode", "parameters": {"mode": "stroke_priority", "slot_priority": "stroke"}},
+        {"target": "Radiology CT Queue", "action": "reserve_capacity", "parameters": {"capacity": 4, "slot_priority": "urgent"}},
+        {"target": "Emergency Department Intake", "action": "route_patient_flow", "parameters": {"destination": "radiology", "acuity": "high"}},
+        {"target": "Radiology CT Queue", "action": "generate_sitrep", "parameters": {"slot_priority": "urgent"}}
+      ]
+    }
+  }
+}

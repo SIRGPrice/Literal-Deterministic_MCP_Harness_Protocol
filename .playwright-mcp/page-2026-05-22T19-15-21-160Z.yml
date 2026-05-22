@@ -1,0 +1,141 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e8]:
+        - strong [ref=e9]: Literal
+        - generic [ref=e10]: 0.1.0 · Literal Studio
+    - navigation [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: Overview
+        - button "Dashboard" [ref=e14] [cursor=pointer]:
+          - img [ref=e15]
+          - generic [ref=e20]: Dashboard
+      - generic [ref=e21]:
+        - generic [ref=e22]: Catalog
+        - button "Actions 5" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e30]: Actions
+          - emphasis [ref=e31]: "5"
+        - button "Capabilities 4" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+          - generic [ref=e43]: Capabilities
+          - emphasis [ref=e44]: "4"
+        - button "Groups 1" [ref=e45] [cursor=pointer]:
+          - img [ref=e46]
+          - generic [ref=e50]: Groups
+          - emphasis [ref=e51]: "1"
+        - button "Scenarios 2" [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+          - generic [ref=e57]: Scenarios
+          - emphasis [ref=e58]: "2"
+      - generic [ref=e59]:
+        - generic [ref=e60]: Governance
+        - button "Policies 6" [ref=e61] [cursor=pointer]:
+          - img [ref=e62]
+          - generic [ref=e65]: Policies
+          - emphasis [ref=e66]: "6"
+      - generic [ref=e67]:
+        - generic [ref=e68]: Runtime
+        - button "Simulator" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+          - generic [ref=e74]: Simulator
+        - button "Traces 70" [ref=e75] [cursor=pointer]:
+          - img [ref=e76]
+          - generic [ref=e78]: Traces
+          - emphasis [ref=e79]: "70"
+      - generic [ref=e80]:
+        - generic [ref=e81]: Connect
+        - button "Integrations" [ref=e82] [cursor=pointer]:
+          - img [ref=e83]
+          - generic [ref=e89]: Integrations
+        - button "Settings" [ref=e90] [cursor=pointer]:
+          - img [ref=e91]
+          - generic [ref=e94]: Settings
+    - button "Dark mode" [ref=e96] [cursor=pointer]:
+      - img [ref=e97]
+      - text: Dark mode
+  - main [ref=e99]:
+    - generic [ref=e100]:
+      - generic [ref=e101]:
+        - paragraph [ref=e102]: Smart Office Agent Harness
+        - heading "Dashboard" [level=1] [ref=e103]
+        - paragraph [ref=e104]: Overview of catalog, governance, and live simulation.
+      - generic [ref=e105]:
+        - button "Import" [ref=e106] [cursor=pointer]:
+          - img [ref=e107]
+          - text: Import
+        - button "Export" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - text: Export
+        - button "Reload from server" [ref=e114] [cursor=pointer]:
+          - img [ref=e115]
+        - button "Revert" [disabled] [ref=e120]:
+          - img [ref=e121]
+          - text: Revert
+        - button "Save changes" [disabled] [ref=e124]:
+          - img [ref=e125]
+          - text: Save changes
+    - generic [ref=e130]:
+      - generic [ref=e131]:
+        - img [ref=e133]
+        - generic [ref=e143]: Capabilities
+        - strong [ref=e144]: "4"
+      - generic [ref=e145]:
+        - img [ref=e147]
+        - generic [ref=e153]: Actions
+        - strong [ref=e154]: "5"
+      - generic [ref=e155]:
+        - img [ref=e157]
+        - generic [ref=e161]: Scenarios
+        - strong [ref=e162]: "2"
+      - generic [ref=e163]:
+        - img [ref=e165]
+        - generic [ref=e168]: Guardrails
+        - strong [ref=e169]: "1"
+      - generic [ref=e170]:
+        - generic [ref=e171]:
+          - img [ref=e172]
+          - generic [ref=e174]: Recent decisions
+        - generic [ref=e176]:
+          - generic [ref=e177]:
+            - generic [ref=e179]:
+              - generic [ref=e180]: fast_path
+              - generic [ref=e181]: Lobby lights → turn_on
+            - code [ref=e182]: completed
+          - generic [ref=e183]:
+            - generic [ref=e185]:
+              - generic [ref=e186]: scenario
+              - generic [ref=e187]: Quiet hours → scenario
+            - code [ref=e188]: completed
+          - generic [ref=e189]:
+            - generic [ref=e191]:
+              - generic [ref=e192]: scenario:step
+              - generic [ref=e193]: Lobby lights → set
+            - code [ref=e194]: completed
+          - generic [ref=e195]:
+            - generic [ref=e197]:
+              - generic [ref=e198]: scenario:step
+              - generic [ref=e199]: Visitor check-in kiosk → turn_off
+            - code [ref=e200]: completed
+          - generic [ref=e201]:
+            - generic [ref=e203]:
+              - generic [ref=e204]: scenario
+              - generic [ref=e205]: Quiet hours → scenario
+            - code [ref=e206]: completed
+          - generic [ref=e207]:
+            - generic [ref=e209]:
+              - generic [ref=e210]: scenario:step
+              - generic [ref=e211]: Lobby lights → set
+            - code [ref=e212]: completed
+      - generic [ref=e213]:
+        - generic [ref=e214]:
+          - img [ref=e215]
+          - generic [ref=e219]: Fast simulation
+        - generic [ref=e221]:
+          - textbox "Simulation prompt" [ref=e222]:
+            - /placeholder: turn on lobby lights
+            - text: turn on lobby lights
+          - button "Run" [ref=e223] [cursor=pointer]:
+            - img [ref=e224]
+            - text: Run

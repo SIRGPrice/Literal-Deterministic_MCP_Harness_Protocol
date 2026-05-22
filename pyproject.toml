@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "literal"
+version = "0.2.0"
+description = "Literal — Deterministic MCP Harness Protocol."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Literal" }]
+license = { file = "LICENSE" }
+keywords = ["mcp", "agents", "tool-calling", "determinism", "governance", "ai"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Framework :: AsyncIO",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
+dependencies = []
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.6"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+literal = "literal.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["literal*"]
+
+[tool.setuptools.package-data]
+literal = ["templates/*.json", "templates/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

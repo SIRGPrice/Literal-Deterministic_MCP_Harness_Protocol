@@ -1,0 +1,20 @@
+{
+  "fuzzy_cutoff": 0.62,
+  "inspect_verbs": ["inspect", "status", "show", "check"],
+  "scenario_verbs": ["run", "start", "activate", "execute"],
+  "synonyms": {
+    "turn_on": ["power on", "bring up"],
+    "turn_off": ["power down", "shut down"],
+    "set": ["put", "make"],
+    "high": ["maximum", "bright"],
+    "low": ["minimum", "dim"]
+  },
+  "confirmations": [
+    {
+      "target": "Server room door",
+      "action": "unlock",
+      "reason": "Restricted access requires explicit confirmation."
+    }
+  ],
+  "deny": []
+}

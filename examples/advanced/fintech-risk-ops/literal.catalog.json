@@ -1,0 +1,194 @@
+{
+  "name": "Fintech Risk Operations Harness",
+  "version": "0.2.0-advanced",
+  "actions": {
+    "inspect_status": {
+      "description": "Read operational state without changing money movement.",
+      "verbs": ["inspect", "show", "check", "status"]
+    },
+    "notify_team": {
+      "description": "Notify an internal risk, compliance, or support team.",
+      "verbs": ["notify", "page", "alert"]
+    },
+    "screen_transaction": {
+      "description": "Run deterministic risk screening on a transaction queue.",
+      "verbs": ["screen", "risk check", "assess"]
+    },
+    "hold_transaction": {
+      "description": "Place a payment or card transaction on hold.",
+      "verbs": ["hold", "pause", "block temporarily"]
+    },
+    "release_hold": {
+      "description": "Release a previously held transaction.",
+      "verbs": ["release", "clear hold"]
+    },
+    "freeze_account": {
+      "description": "Freeze account movement at the ledger boundary.",
+      "verbs": ["freeze", "lock account"]
+    },
+    "unfreeze_account": {
+      "description": "Unfreeze account movement.",
+      "verbs": ["unfreeze", "unlock account"]
+    },
+    "issue_small_refund": {
+      "description": "Issue an automatically allowed refund below the configured ceiling.",
+      "verbs": ["refund", "small refund", "credit"]
+    },
+    "issue_large_refund": {
+      "description": "Issue a refund requiring explicit approval.",
+      "verbs": ["large refund", "manual refund"]
+    },
+    "adjust_limit": {
+      "description": "Adjust a customer or merchant limit.",
+      "verbs": ["adjust limit", "change limit"]
+    },
+    "file_sar_draft": {
+      "description": "Create a suspicious activity report draft, not a legal filing.",
+      "verbs": ["draft SAR", "prepare SAR", "create SAR draft"]
+    },
+    "settle_batch": {
+      "description": "Settle a payment batch.",
+      "verbs": ["settle", "settle batch"]
+    },
+    "rotate_api_key": {
+      "description": "Rotate tenant API credentials.",
+      "verbs": ["rotate key", "rotate api key"]
+    },
+    "export_audit_pack": {
+      "description": "Export an audit evidence pack.",
+      "verbs": ["export audit", "audit pack", "evidence pack"]
+    },
+    "delete_ledger_entry": {
+      "description": "Ledger deletion boundary; explicitly denied.",
+      "verbs": ["delete ledger", "remove ledger entry"]
+    },
+    "wire_funds": {
+      "description": "External funds movement boundary; explicitly confirmation-gated or denied.",
+      "verbs": ["wire funds", "send wire"]
+    }
+  },
+  "capabilities": {
+    "EU Card Ledger": {
+      "kind": "payment-rail",
+      "description": "Card ledger for EU tenant traffic.",
+      "aliases": ["europe card rail", "EU cards", "card ledger EU"],
+      "actions": ["inspect_status", "screen_transaction", "hold_transaction", "release_hold", "freeze_account", "unfreeze_account", "export_audit_pack", "delete_ledger_entry"],
+      "parameters": {
+        "tenant": {"values": ["acme_eu", "northwind_eu", "contoso_eu"]},
+        "risk_level": {"values": ["low", "medium", "high", "critical"]},
+        "amount_band": {"values": ["micro", "standard", "elevated", "high_value"]},
+        "amount_eur": {"range": [0, 50000]},
+        "reason": {"values": ["fraud_signal", "chargeback", "sanctions_hit", "manual_review", "customer_request"]}
+      },
+      "state": {"mode": "live", "held_transactions": 14, "critical_alerts": 2}
+    },
+    "US ACH Rail": {
+      "kind": "payment-rail",
+      "description": "ACH operations for US tenants.",
+      "aliases": ["ACH", "US payments", "bank transfer rail"],
+      "actions": ["inspect_status", "screen_transaction", "hold_transaction", "release_hold", "freeze_account", "unfreeze_account", "settle_batch", "export_audit_pack", "delete_ledger_entry"],
+      "parameters": {
+        "tenant": {"values": ["acme_us", "northwind_us", "contoso_us"]},
+        "risk_level": {"values": ["low", "medium", "high", "critical"]},
+        "amount_usd": {"range": [0, 100000]},
+        "batch_window": {"values": ["morning", "midday", "evening", "emergency"]},
+        "reason": {"values": ["fraud_signal", "return_rate", "sanctions_hit", "manual_review", "customer_request"]}
+      },
+      "state": {"mode": "live", "held_batches": 3, "return_rate": "yellow"}
+    },
+    "Chargeback Desk": {
+      "kind": "operations-queue",
+      "description": "Queue for disputes, credits, and chargeback evidence.",
+      "aliases": ["disputes", "chargebacks", "claims desk"],
+      "actions": ["inspect_status", "issue_small_refund", "issue_large_refund", "export_audit_pack", "notify_team"],
+      "parameters": {
+        "tenant": {"values": ["acme_eu", "acme_us", "northwind_eu", "northwind_us", "contoso_eu", "contoso_us"]},
+        "amount": {"range": [0, 10000]},
+        "currency": {"values": ["EUR", "USD", "GBP"]},
+        "reason": {"values": ["service_error", "duplicate_charge", "fraud_claim", "goodwill", "legal_request"]}
+      },
+      "state": {"open_cases": 421, "sla_risk": "medium"}
+    },
+    "Treasury Vault": {
+      "kind": "treasury-control",
+      "description": "High-value liquidity and wire-control boundary.",
+      "aliases": ["treasury", "vault", "liquidity desk"],
+      "actions": ["inspect_status", "wire_funds", "export_audit_pack"],
+      "parameters": {
+        "currency": {"values": ["EUR", "USD", "GBP"]},
+        "amount": {"range": [0, 1000000]},
+        "destination": {"values": ["reserve_bank", "settlement_partner", "custody_account", "manual_review"]},
+        "reason": {"values": ["settlement", "liquidity_rebalance", "incident", "manual_review"]}
+      },
+      "state": {"mode": "dual_control", "pending_wires": 2, "last_reconciliation": "ok"}
+    },
+    "AML Review Queue": {
+      "kind": "compliance-queue",
+      "description": "Anti-money-laundering review and SAR draft workflow.",
+      "aliases": ["AML", "compliance queue", "SAR queue"],
+      "actions": ["inspect_status", "screen_transaction", "file_sar_draft", "export_audit_pack"],
+      "parameters": {
+        "tenant": {"values": ["acme_eu", "acme_us", "northwind_eu", "northwind_us", "contoso_eu", "contoso_us"]},
+        "risk_level": {"values": ["low", "medium", "high", "critical"]},
+        "reason": {"values": ["sanctions_hit", "structuring", "velocity", "manual_review", "law_enforcement_request"]}
+      },
+      "state": {"open_reviews": 33, "critical_reviews": 4}
+    },
+    "Tenant Control Plane": {
+      "kind": "tenant-admin",
+      "description": "Per-tenant configuration and key management.",
+      "aliases": ["tenant admin", "tenant control", "customer workspace"],
+      "actions": ["inspect_status", "adjust_limit", "rotate_api_key", "export_audit_pack"],
+      "parameters": {
+        "tenant": {"values": ["acme_eu", "acme_us", "northwind_eu", "northwind_us", "contoso_eu", "contoso_us"]},
+        "limit_band": {"values": ["starter", "standard", "growth", "enterprise", "restricted"]},
+        "reason": {"values": ["risk_review", "contract_change", "incident", "customer_request"]}
+      },
+      "state": {"active_tenants": 6, "restricted_tenants": 1}
+    }
+  },
+  "groups": {
+    "ACME Global Payments": {
+      "description": "All ACME rails and tenant controls.",
+      "aliases": ["ACME payments", "acme tenant"],
+      "members": ["EU Card Ledger", "US ACH Rail", "Tenant Control Plane"],
+      "actions": ["inspect_status", "screen_transaction", "hold_transaction", "export_audit_pack"]
+    },
+    "Financial Crime Response Stack": {
+      "description": "Fraud, AML, and rail controls used during severe events.",
+      "aliases": ["fincrime stack", "fraud response"],
+      "members": ["EU Card Ledger", "US ACH Rail", "AML Review Queue", "Tenant Control Plane"],
+      "actions": ["inspect_status", "screen_transaction", "hold_transaction", "freeze_account", "file_sar_draft", "export_audit_pack"]
+    }
+  },
+  "scenarios": {
+    "card_fraud_lockdown": {
+      "description": "Escalate severe card-fraud signals without deleting or settling money movement.",
+      "aliases": ["fraud lockdown", "card attack mode"],
+      "steps": [
+        {"target": "EU Card Ledger", "action": "screen_transaction", "parameters": {"tenant": "acme_eu", "risk_level": "critical", "amount_band": "high_value", "reason": "fraud_signal"}},
+        {"target": "EU Card Ledger", "action": "hold_transaction", "parameters": {"tenant": "acme_eu", "risk_level": "critical", "amount_band": "high_value", "reason": "fraud_signal"}},
+        {"target": "AML Review Queue", "action": "screen_transaction", "parameters": {"tenant": "acme_eu", "risk_level": "high", "reason": "velocity"}},
+        {"target": "Financial Crime Response Stack", "action": "export_audit_pack", "parameters": {"tenant": "acme_eu", "risk_level": "critical", "reason": "manual_review"}}
+      ]
+    },
+    "high_value_wire_review": {
+      "description": "Prepare a dual-control wire review while preventing autonomous funds movement.",
+      "aliases": ["wire review", "treasury review"],
+      "steps": [
+        {"target": "Treasury Vault", "action": "inspect_status", "parameters": {"currency": "USD", "reason": "liquidity_rebalance"}},
+        {"target": "AML Review Queue", "action": "screen_transaction", "parameters": {"tenant": "acme_us", "risk_level": "high", "reason": "manual_review"}},
+        {"target": "Treasury Vault", "action": "export_audit_pack", "parameters": {"currency": "USD", "destination": "manual_review", "reason": "manual_review"}}
+      ]
+    },
+    "chargeback_recovery_pack": {
+      "description": "Create evidence and refunds under policy control.",
+      "aliases": ["chargeback pack", "dispute recovery"],
+      "steps": [
+        {"target": "Chargeback Desk", "action": "inspect_status", "parameters": {"tenant": "northwind_eu", "currency": "EUR", "reason": "duplicate_charge"}},
+        {"target": "Chargeback Desk", "action": "issue_small_refund", "parameters": {"tenant": "northwind_eu", "amount": 75, "currency": "EUR", "reason": "duplicate_charge"}},
+        {"target": "Chargeback Desk", "action": "export_audit_pack", "parameters": {"tenant": "northwind_eu", "currency": "EUR", "reason": "duplicate_charge"}}
+      ]
+    }
+  }
+}

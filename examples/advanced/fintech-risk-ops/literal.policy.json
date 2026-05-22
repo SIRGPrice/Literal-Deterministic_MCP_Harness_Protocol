@@ -1,0 +1,68 @@
+{
+  "fuzzy_cutoff": 0.74,
+  "inspect_verbs": ["inspect", "status", "show", "check", "audit"],
+  "scenario_verbs": ["run", "activate", "execute", "start", "prepare"],
+  "synonyms": {
+    "EU Card Ledger": ["EU cards", "europe cards", "card rail"],
+    "US ACH Rail": ["ACH", "bank transfer rail", "US bank rail"],
+    "AML Review Queue": ["AML", "compliance", "SAR queue"],
+    "Treasury Vault": ["treasury", "liquidity desk"],
+    "critical": ["red", "severe", "highest"],
+    "high": ["elevated", "serious"],
+    "fraud_signal": ["fraud", "stolen card", "account takeover"],
+    "sanctions_hit": ["sanctions", "OFAC", "watchlist"],
+    "manual_review": ["human review", "operator review", "analyst review"],
+    "high_value": ["large", "big", "high amount"],
+    "acme_eu": ["acme europe", "acme EU"],
+    "acme_us": ["acme US", "acme america"]
+  },
+  "confirmations": [
+    {
+      "target": "EU Card Ledger",
+      "action": "freeze_account",
+      "reason": "Freezing accounts blocks customer money movement and requires risk lead approval."
+    },
+    {
+      "target": "US ACH Rail",
+      "action": "freeze_account",
+      "reason": "Freezing ACH accounts requires risk lead approval."
+    },
+    {
+      "target": "Chargeback Desk",
+      "action": "issue_large_refund",
+      "reason": "Large refunds require dual approval."
+    },
+    {
+      "target": "Treasury Vault",
+      "action": "wire_funds",
+      "reason": "Treasury wire movement requires dual-control human approval."
+    },
+    {
+      "target": "Tenant Control Plane",
+      "action": "rotate_api_key",
+      "reason": "Credential rotation can break tenant integrations."
+    },
+    {
+      "target": "Financial Crime Response Stack",
+      "action": "freeze_account",
+      "reason": "Cross-rail freezes require incident commander approval."
+    }
+  ],
+  "deny": [
+    {
+      "target": "EU Card Ledger",
+      "action": "delete_ledger_entry",
+      "reason": "Ledger history is append-only; deletion is forbidden."
+    },
+    {
+      "target": "US ACH Rail",
+      "action": "delete_ledger_entry",
+      "reason": "Ledger history is append-only; deletion is forbidden."
+    },
+    {
+      "target": "Treasury Vault",
+      "action": "settle_batch",
+      "reason": "Treasury batch settlement must remain outside autonomous agent scope."
+    }
+  ]
+}

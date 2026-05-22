@@ -1,0 +1,254 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - img [ref=e7]
+      - generic [ref=e8]:
+        - strong [ref=e9]: Literal
+        - generic [ref=e10]: 0.1.0 · Literal Studio
+    - navigation [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: Overview
+        - button "Dashboard" [ref=e14] [cursor=pointer]:
+          - img [ref=e15]
+          - generic [ref=e20]: Dashboard
+      - generic [ref=e21]:
+        - generic [ref=e22]: Catalog
+        - button "Actions 5" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e30]: Actions
+          - emphasis [ref=e31]: "5"
+        - button "Capabilities 4" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+          - generic [ref=e43]: Capabilities
+          - emphasis [ref=e44]: "4"
+        - button "Groups 1" [ref=e45] [cursor=pointer]:
+          - img [ref=e46]
+          - generic [ref=e50]: Groups
+          - emphasis [ref=e51]: "1"
+        - button "Scenarios 2" [active] [ref=e52] [cursor=pointer]:
+          - img [ref=e53]
+          - generic [ref=e57]: Scenarios
+          - emphasis [ref=e58]: "2"
+      - generic [ref=e59]:
+        - generic [ref=e60]: Governance
+        - button "Policies 6" [ref=e61] [cursor=pointer]:
+          - img [ref=e62]
+          - generic [ref=e65]: Policies
+          - emphasis [ref=e66]: "6"
+      - generic [ref=e67]:
+        - generic [ref=e68]: Runtime
+        - button "Simulator" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+          - generic [ref=e74]: Simulator
+        - button "Traces 70" [ref=e75] [cursor=pointer]:
+          - img [ref=e76]
+          - generic [ref=e78]: Traces
+          - emphasis [ref=e79]: "70"
+      - generic [ref=e80]:
+        - generic [ref=e81]: Connect
+        - button "Integrations" [ref=e82] [cursor=pointer]:
+          - img [ref=e83]
+          - generic [ref=e89]: Integrations
+        - button "Settings" [ref=e90] [cursor=pointer]:
+          - img [ref=e91]
+          - generic [ref=e94]: Settings
+    - button "Dark mode" [ref=e96] [cursor=pointer]:
+      - img [ref=e97]
+      - text: Dark mode
+  - main [ref=e99]:
+    - generic [ref=e100]:
+      - generic [ref=e101]:
+        - paragraph [ref=e102]: Smart Office Agent Harness
+        - heading "Scenarios" [level=1] [ref=e432]
+        - paragraph [ref=e104]: Multi-step automations triggered by name or natural language.
+      - generic [ref=e105]:
+        - button "Import" [ref=e106] [cursor=pointer]:
+          - img [ref=e107]
+          - text: Import
+        - button "Export" [ref=e110] [cursor=pointer]:
+          - img [ref=e111]
+          - text: Export
+        - button "Reload from server" [ref=e114] [cursor=pointer]:
+          - img [ref=e115]
+        - button "Revert" [disabled] [ref=e120]:
+          - img [ref=e121]
+          - text: Revert
+        - button "Save changes" [disabled] [ref=e124]:
+          - img [ref=e125]
+          - text: Save changes
+    - generic [ref=e433]:
+      - generic [ref=e434]:
+        - textbox "New scenario name" [ref=e435]:
+          - /placeholder: Opening mode, Closing mode…
+        - button "Add scenario" [ref=e436] [cursor=pointer]:
+          - img [ref=e437]
+          - text: Add scenario
+      - generic [ref=e438]:
+        - article [ref=e439]:
+          - generic [ref=e440]:
+            - textbox "Name" [ref=e441]: Opening mode
+            - generic [ref=e442]:
+              - button "Run" [ref=e443] [cursor=pointer]:
+                - img [ref=e444]
+                - text: Run
+              - button "Delete scenario" [ref=e446] [cursor=pointer]:
+                - img [ref=e447]
+          - generic [ref=e450]:
+            - generic [ref=e451]: Description
+            - textbox "Scenario description" [ref=e452]: Prepare the office for the day.
+          - generic [ref=e453]:
+            - generic [ref=e454]: Aliases
+            - generic [ref=e455]:
+              - generic [ref=e456]:
+                - text: open the office
+                - button "Remove open the office" [ref=e457] [cursor=pointer]: ×
+              - generic [ref=e458]:
+                - text: morning mode
+                - button "Remove morning mode" [ref=e459] [cursor=pointer]: ×
+              - textbox "morning mode" [ref=e460]
+          - generic [ref=e461]:
+            - generic [ref=e462]:
+              - heading "Steps" [level=3] [ref=e463]
+              - button "Add step" [ref=e464] [cursor=pointer]:
+                - img [ref=e465]
+                - text: Add step
+            - list [ref=e466]:
+              - listitem [ref=e467]:
+                - generic [ref=e468]:
+                  - combobox "Step target" [ref=e469]:
+                    - option "Lobby lights"
+                    - option "Meeting room climate"
+                    - option "Server room door"
+                    - option "Visitor check-in kiosk"
+                    - option "Public areas" [selected]
+                  - combobox "Step action" [ref=e470]:
+                    - option "turn_on" [selected]
+                    - option "turn_off"
+                    - option "set"
+                    - option "lock"
+                    - option "unlock"
+                  - textbox "Step parameters JSON" [ref=e471]:
+                    - /placeholder: "{\"level\":\"medium\"}"
+                    - text: "{}"
+                  - generic [ref=e472]:
+                    - button "Move up" [ref=e473] [cursor=pointer]: ↑
+                    - button "Move down" [ref=e474] [cursor=pointer]: ↓
+                    - button "Delete step" [ref=e475] [cursor=pointer]:
+                      - img [ref=e476]
+              - listitem [ref=e479]:
+                - generic [ref=e480]:
+                  - combobox "Step target" [ref=e481]:
+                    - option "Lobby lights" [selected]
+                    - option "Meeting room climate"
+                    - option "Server room door"
+                    - option "Visitor check-in kiosk"
+                    - option "Public areas"
+                  - combobox "Step action" [ref=e482]:
+                    - option "turn_on"
+                    - option "turn_off"
+                    - option "set" [selected]
+                    - option "lock"
+                    - option "unlock"
+                  - textbox "Step parameters JSON" [ref=e483]:
+                    - /placeholder: "{\"level\":\"medium\"}"
+                    - text: "{\"level\":\"medium\",\"temperature\":\"warm\"}"
+                  - generic [ref=e484]:
+                    - button "Move up" [ref=e485] [cursor=pointer]: ↑
+                    - button "Move down" [ref=e486] [cursor=pointer]: ↓
+                    - button "Delete step" [ref=e487] [cursor=pointer]:
+                      - img [ref=e488]
+              - listitem [ref=e491]:
+                - generic [ref=e492]:
+                  - combobox "Step target" [ref=e493]:
+                    - option "Lobby lights"
+                    - option "Meeting room climate" [selected]
+                    - option "Server room door"
+                    - option "Visitor check-in kiosk"
+                    - option "Public areas"
+                  - combobox "Step action" [ref=e494]:
+                    - option "turn_on"
+                    - option "turn_off"
+                    - option "set" [selected]
+                    - option "lock"
+                    - option "unlock"
+                  - textbox "Step parameters JSON" [ref=e495]:
+                    - /placeholder: "{\"level\":\"medium\"}"
+                    - text: "{\"temperature\":22,\"mode\":\"comfort\"}"
+                  - generic [ref=e496]:
+                    - button "Move up" [ref=e497] [cursor=pointer]: ↑
+                    - button "Move down" [ref=e498] [cursor=pointer]: ↓
+                    - button "Delete step" [ref=e499] [cursor=pointer]:
+                      - img [ref=e500]
+        - article [ref=e503]:
+          - generic [ref=e504]:
+            - textbox "Name" [ref=e505]: Quiet hours
+            - generic [ref=e506]:
+              - button "Run" [ref=e507] [cursor=pointer]:
+                - img [ref=e508]
+                - text: Run
+              - button "Delete scenario" [ref=e510] [cursor=pointer]:
+                - img [ref=e511]
+          - generic [ref=e514]:
+            - generic [ref=e515]: Description
+            - textbox "Scenario description" [ref=e516]: Reduce activity after close.
+          - generic [ref=e517]:
+            - generic [ref=e518]: Aliases
+            - generic [ref=e519]:
+              - generic [ref=e520]:
+                - text: evening mode
+                - button "Remove evening mode" [ref=e521] [cursor=pointer]: ×
+              - generic [ref=e522]:
+                - text: after hours
+                - button "Remove after hours" [ref=e523] [cursor=pointer]: ×
+              - textbox "morning mode" [ref=e524]
+          - generic [ref=e525]:
+            - generic [ref=e526]:
+              - heading "Steps" [level=3] [ref=e527]
+              - button "Add step" [ref=e528] [cursor=pointer]:
+                - img [ref=e529]
+                - text: Add step
+            - list [ref=e530]:
+              - listitem [ref=e531]:
+                - generic [ref=e532]:
+                  - combobox "Step target" [ref=e533]:
+                    - option "Lobby lights"
+                    - option "Meeting room climate"
+                    - option "Server room door"
+                    - option "Visitor check-in kiosk" [selected]
+                    - option "Public areas"
+                  - combobox "Step action" [ref=e534]:
+                    - option "turn_on"
+                    - option "turn_off" [selected]
+                    - option "set"
+                    - option "lock"
+                    - option "unlock"
+                  - textbox "Step parameters JSON" [ref=e535]:
+                    - /placeholder: "{\"level\":\"medium\"}"
+                    - text: "{}"
+                  - generic [ref=e536]:
+                    - button "Move up" [ref=e537] [cursor=pointer]: ↑
+                    - button "Move down" [ref=e538] [cursor=pointer]: ↓
+                    - button "Delete step" [ref=e539] [cursor=pointer]:
+                      - img [ref=e540]
+              - listitem [ref=e543]:
+                - generic [ref=e544]:
+                  - combobox "Step target" [ref=e545]:
+                    - option "Lobby lights" [selected]
+                    - option "Meeting room climate"
+                    - option "Server room door"
+                    - option "Visitor check-in kiosk"
+                    - option "Public areas"
+                  - combobox "Step action" [ref=e546]:
+                    - option "turn_on"
+                    - option "turn_off"
+                    - option "set" [selected]
+                    - option "lock"
+                    - option "unlock"
+                  - textbox "Step parameters JSON" [ref=e547]:
+                    - /placeholder: "{\"level\":\"medium\"}"
+                    - text: "{\"level\":\"low\",\"temperature\":\"warm\"}"
+                  - generic [ref=e548]:
+                    - button "Move up" [ref=e549] [cursor=pointer]: ↑
+                    - button "Move down" [ref=e550] [cursor=pointer]: ↓
+                    - button "Delete step" [ref=e551] [cursor=pointer]:
+                      - img [ref=e552]

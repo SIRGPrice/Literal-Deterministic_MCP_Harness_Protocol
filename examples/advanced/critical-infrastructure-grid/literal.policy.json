@@ -1,0 +1,66 @@
+{
+  "fuzzy_cutoff": 0.82,
+  "inspect_verbs": ["inspect", "status", "show", "check", "telemetry"],
+  "scenario_verbs": ["run", "activate", "execute", "start", "prepare"],
+  "synonyms": {
+    "North Battery Fleet": ["north BESS", "north batteries", "battery fleet"],
+    "Hospital Feeder 12": ["hospital feeder", "feeder twelve", "critical feeder"],
+    "Breaker SW-17": ["SW17", "breaker seventeen", "switch seventeen"],
+    "Downtown Microgrid": ["downtown island", "microgrid", "critical island"],
+    "Demand Response Stack": ["DR", "peak response", "load response"],
+    "storm": ["weather", "storm event", "wind fault"],
+    "fault_isolation": ["fault", "isolate fault"],
+    "black_start": ["blackstart", "cold restore"],
+    "critical": ["red", "highest", "life safety"],
+    "deferable": ["flexible", "noncritical"]
+  },
+  "confirmations": [
+    {
+      "target": "Breaker SW-17",
+      "action": "open_breaker",
+      "reason": "Opening a physical breaker changes grid topology and requires operator confirmation."
+    },
+    {
+      "target": "Breaker SW-17",
+      "action": "close_breaker",
+      "reason": "Closing a physical breaker requires field-safe synchronization confirmation."
+    },
+    {
+      "target": "Downtown Microgrid",
+      "action": "island_microgrid",
+      "reason": "Islanding a microgrid affects critical-load continuity and requires operator approval."
+    },
+    {
+      "target": "Downtown Microgrid",
+      "action": "reconnect_grid",
+      "reason": "Grid reconnection requires synchronization and human approval."
+    },
+    {
+      "target": "Critical Load Island Stack",
+      "action": "open_breaker",
+      "reason": "Group breaker operations require command approval."
+    },
+    {
+      "target": "Critical Load Island Stack",
+      "action": "close_breaker",
+      "reason": "Group breaker operations require command approval."
+    }
+  ],
+  "deny": [
+    {
+      "target": "Breaker SW-17",
+      "action": "disable_protection",
+      "reason": "Relay and protection bypass is forbidden for autonomous agents."
+    },
+    {
+      "target": "Breaker SW-17",
+      "action": "force_manual_override",
+      "reason": "Manual override must be performed only by authorized operators."
+    },
+    {
+      "target": "Hospital Feeder 12",
+      "action": "shed_load",
+      "reason": "Critical hospital feeder load cannot be shed by an autonomous agent."
+    }
+  ]
+}

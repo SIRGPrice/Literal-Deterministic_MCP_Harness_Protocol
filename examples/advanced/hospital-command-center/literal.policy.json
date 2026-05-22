@@ -1,0 +1,60 @@
+{
+  "fuzzy_cutoff": 0.78,
+  "inspect_verbs": ["inspect", "status", "show", "check", "what is"],
+  "scenario_verbs": ["run", "activate", "execute", "start"],
+  "synonyms": {
+    "Emergency Department Intake": ["ED", "ER", "triage"],
+    "ICU Bed Board": ["ICU", "critical care"],
+    "Hospital Incident Command": ["HICS", "command"],
+    "mass_casualty": ["MCI", "major incident", "multi casualty"],
+    "infectious_surge": ["outbreak", "infection surge", "containment"],
+    "critical": ["red", "highest", "life threatening"],
+    "major": ["orange", "severe"],
+    "infection_control": ["IPC", "infection prevention"],
+    "trauma_priority": ["trauma first", "trauma mode"]
+  },
+  "confirmations": [
+    {
+      "target": "Hospital Incident Command",
+      "action": "escalate_to_commander",
+      "reason": "Escalating to the incident commander pages the executive on-call chain."
+    },
+    {
+      "target": "Hospital Incident Command",
+      "action": "open_incident_channel",
+      "reason": "Opening a command channel notifies multiple teams."
+    },
+    {
+      "target": "Isolation Ward",
+      "action": "lockdown_unit",
+      "reason": "Lockdown affects patient movement and requires human authorization."
+    },
+    {
+      "target": "Critical Care Surge Stack",
+      "action": "reserve_capacity",
+      "reason": "Cross-unit capacity reservations change operational posture."
+    },
+    {
+      "target": "Infection Control Stack",
+      "action": "lockdown_unit",
+      "reason": "Cross-unit lockdown requires command approval."
+    }
+  ],
+  "deny": [
+    {
+      "target": "Clinical Authority Boundary",
+      "action": "discharge_patient",
+      "reason": "Agents may coordinate operations but must never discharge a patient."
+    },
+    {
+      "target": "Clinical Authority Boundary",
+      "action": "override_clinician",
+      "reason": "Agents must not override clinician judgment."
+    },
+    {
+      "target": "Clinical Authority Boundary",
+      "action": "create_prescription",
+      "reason": "Prescription creation is outside the operational command scope."
+    }
+  ]
+}

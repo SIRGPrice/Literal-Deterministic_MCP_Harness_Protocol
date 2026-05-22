@@ -1,0 +1,45 @@
+# Literal Source-Available Commercial License 1.0
+
+Copyright (c) 2026 Literal — Deterministic MCP Harness Protocol. All rights reserved.
+
+This software and associated documentation files (the "Software") are made available for review, evaluation, and internal non-production testing only, subject to the terms below.
+
+## 1. Permitted Evaluation Use
+
+You may read, clone, build, and run the Software solely for personal evaluation, security review, interoperability assessment, or internal non-production proof-of-concept testing.
+
+## 2. Commercial Use Requires Prior Written License
+
+You may not use the Software, in whole or in part, for any commercial, revenue-generating, customer-facing, production, hosted, managed service, embedded, resale, consulting, outsourcing, or sublicensed purpose without a separate written commercial license granted by the copyright holder.
+
+## 3. Restrictions
+
+Without prior written permission, you may not:
+
+- sell, rent, lease, sublicense, redistribute, host, or provide the Software as a service;
+- integrate the Software into a product, platform, customer deployment, or paid workflow;
+- remove notices, branding, licensing text, or attribution files;
+- use the Software to train, fine-tune, distill, or benchmark competing commercial products;
+- publish modified builds or derivative commercial offerings.
+
+## 4. No Trademark Grant
+
+No rights are granted to use the names, marks, logos, or branding associated with Literal.
+
+## 5. Third-Party Components
+
+Third-party dependencies remain governed by their own licenses. See THIRD_PARTY_NOTICES.md where applicable.
+
+## 6. Termination
+
+Any use outside this license automatically terminates the permissions granted here. Upon termination, you must stop using the Software and delete copies under your control unless a commercial agreement states otherwise.
+
+## 7. Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, SECURITY, OR AVAILABILITY. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS USE.
+
+## 8. Commercial Licensing
+
+To request a commercial license, follow COMMERCIAL_LICENSE_REQUEST.md.
+
+This is a source-available license. It is not an open source license as defined by the Open Source Initiative because it restricts commercial use.
