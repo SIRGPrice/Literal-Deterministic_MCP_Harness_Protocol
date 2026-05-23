@@ -1,6 +1,6 @@
 # Literal
 
-**Deterministic MCP Harness Protocol.** Predictable tool decision and execution, compacted schemas prompts, auditability, observility, local and private by design.
+**Deterministic MCP Harness Protocol.** Predictable tool decision and execution, compacted schema prompts, auditability, observility, normalization, generalization, local and private by design.
 
 Literal sits between an agent and customer tools, turning ambiguous natural language into canonical calls where possible, validating every generated call before execution, and recording why a decision was allowed, denied, corrected, or escalated.
 
@@ -10,7 +10,7 @@ Literal sits between an agent and customer tools, turning ambiguous natural lang
 
 ## Literal Studio
 
-A local-first control plane to configure, simulate, and observe your harness.
+A local control plane to configure, simulate, and observe your MCP harness.
 
 ### Dashboard
 
