@@ -448,3 +448,13 @@ cd apps/studio
 npm install
 npm run build
 ```
+
+---
+
+<div align="center">
+
+Made with 💙 by engineers
+
+</div>
+
+---
